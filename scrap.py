@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 
+
 def scrapit(url):
     res = requests.get(f'https://en.wikipedia.org/wiki/{url}')
     soup = bs(res.text, 'lxml')
