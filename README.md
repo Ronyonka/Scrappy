@@ -35,6 +35,6 @@ pip install -r requirements.txt
 ### Run the script in the terminal
 
 ```bash
-python3.6 manage.py 'Hurricane_Dorian'
+python3 createpdf.py 'Hurricane_Dorian'
 ```
 replace 'Hurricane_Dorian' with any wikipedia article name from its url. A pdf should be found in the project folder
