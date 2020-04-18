@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <title>Carto Test</title>
+</head>
+<body>
+    <h1>Map</h1>
+    <div id="map"></div>
+    <script src="https://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+<script>
+// get the viz.json url from the CARTO Editor
+// - click on visualize
+// - create new visualization
+// - make visualization public
+// - click on publish
+// - go to API tab
+
+// window.onload = function() {
+//   cartodb.createVis('map', 'https://carto.upande-iot.co.ke/user/dev/api/v2/viz/049c95a5-7810-4625-b563-53b08b136ea0/viz.json');
+// }
+var client = new carto.Client({
+  apiKey: 'eb6e8eea6fb41a404c7b8e3b27ded22717e6d3c2',
+  username: 'dev'
+});
+function main() {
+        cartodb.createVis('map', 'https://carto.upande-iot.co.ke/user/dev/api/v2/viz/049c95a5-7810-4625-b563-53b08b136ea0/viz.json', {
+            shareable: true,
+            title: true,
+            description: true,
+            search: true,
+            tiles_loader: true,
+            center_lat: 0,
+            center_lon: 0,
+            zoom: 2
+        })
+        .done(function(vis, layers) {
+          // layer 0 is the base layer, layer 1 is cartodb layer
+          // setInteraction is disabled by default
+          layers[1].setInteraction(true);
+          layers[1].on('featureOver', function(e, latlng, pos, data) {
+            cartodb.log.log(e, latlng, pos, data);
+          });
+
+          // you can get the native map to work with it
+          var map = vis.getNativeMap();
+
+          // now, perform any operations you need
+          // map.setZoom(3);
+          // map.panTo([50.5, 30.5]);
+        })
+        .error(function(err) {
+          console.log(err);
+        });
+      }
+
+      window.onload = main;
+</script>
+</body>
+</html>
